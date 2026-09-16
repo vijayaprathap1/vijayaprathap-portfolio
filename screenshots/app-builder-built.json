@@ -1,0 +1,40 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Vijayaprathap P — Senior Frontend Engineer",
+      "hasCanvas": false,
+      "bodyTextLen": 4363,
+      "bodyTextHash": "b0392e9cac26bc27d7a50ca80f8440ef2e6f7f37c9115b9f5321d328bdae3230",
+      "bodyTextPrefix": "Skip to work VP WORK ABOUT SPEC CONTACT IST 10:30:37 Contact STA",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Vijayaprathap P — Senior Frontend Engineer",
+      "hasCanvas": false,
+      "bodyTextLen": 4296,
+      "bodyTextHash": "884e8ac85a6ebbee45ada596b011ecd262f8ca301e125a6702d0958223c43256",
+      "bodyTextPrefix": "Skip to work VP STATUS — AVAILABLE VIJAYAPRATHAP P Senior Fronte",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": true,
+  "baselineReasons": [
+    "desktop: body text replaced (similar length, page start changed)"
+  ]
+}

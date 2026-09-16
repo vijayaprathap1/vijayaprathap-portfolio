@@ -105,7 +105,12 @@ export default async function grokPwaMiddleware(
     String(result.headers.get("content-type") ?? "").includes("text/html") &&
     !result.headers.get("content-encoding")
   ) {
-    return injectHeadStreaming(result, requestHost(event));
+    try {
+      return injectHeadStreaming(result, requestHost(event));
+    } catch (error) {
+      console.error("[grok-pwa] HTML stream injection failed:", error);
+      return result;
+    }
   }
   return result;
 }

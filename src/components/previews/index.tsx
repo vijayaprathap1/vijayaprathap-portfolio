@@ -163,7 +163,7 @@ function MailerPreview() {
 
 function StorePreview() {
   return (
-    <Frame url="ecigplanet.fr">
+    <Frame url="ecigplanete.fr">
       <div className="absolute inset-0 grid grid-cols-3 gap-2 p-3">
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <div key={i} className="flex flex-col gap-1 rounded-md border border-line bg-card p-1.5">
@@ -247,7 +247,122 @@ function NotifyPreview() {
   );
 }
 
+function CollectPreview() {
+  const buckets: [string, number, string][] = [
+    ["0–30", 78, "bg-white/25"],
+    ["31–60", 54, "bg-white/35"],
+    ["61–90", 36, "bg-accent/70"],
+    ["90+", 22, "bg-accent"],
+  ];
+  return (
+    <Frame url="Auto Collect AI">
+      <div className="absolute inset-0 grid grid-cols-[1.1fr_1fr] gap-2.5 p-3">
+        <div className="flex flex-col gap-2 rounded-md border border-line bg-card p-2.5">
+          <p className="text-[8px] tracking-wider text-faint uppercase">Aging buckets</p>
+          <div className="flex flex-1 items-end gap-1.5">
+            {buckets.map(([k, h, c], i) => (
+              <div key={k} className="flex h-full flex-1 flex-col justify-end gap-1">
+                <div
+                  className={`origin-bottom rounded-sm ${c}`}
+                  style={{ height: `${h}%`, animation: `bar 1.2s ${i * 90}ms var(--ease-out-expo) both` }}
+                />
+                <span className="text-center font-mono text-[7px] text-faint">{k}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex min-w-0 flex-col gap-2">
+          <div className="rounded-md border border-line bg-card p-2">
+            <p className="text-[8px] tracking-wider text-faint uppercase">Outstanding</p>
+            <p className="text-[14px] font-medium tabular-nums">€48,210</p>
+          </div>
+          <div className="rounded-md border border-line bg-card p-2">
+            <p className="text-[8px] tracking-wider text-faint uppercase">Recovery rate</p>
+            <div className="mt-1 h-1.5 rounded-full bg-white/5">
+              <div className="h-full w-[72%] rounded-full bg-accent" />
+            </div>
+          </div>
+          <div className="flex items-center justify-between rounded-md border border-accent/40 bg-accent/10 px-2 py-1.5 text-[9px]">
+            <span className="text-dim">INV-2041</span>
+            <span className="rounded bg-accent px-1.5 py-0.5 font-medium text-accent-ink">Pay now</span>
+          </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+function SystemPreview() {
+  return (
+    <Frame>
+      <div className="absolute inset-0 grid grid-cols-2 gap-2 p-3">
+        <div className="flex flex-col gap-1.5 rounded-md border border-line bg-card p-2">
+          <div className="h-4 w-full rounded-full bg-fg" />
+          <div className="h-4 w-full rounded-full border border-line-strong" />
+          <div className="h-4 w-2/3 rounded-full bg-accent" />
+        </div>
+        <div className="flex flex-col gap-1.5 rounded-md border border-line bg-card p-2">
+          <div className="h-4 rounded border border-line-strong" />
+          <div className="flex items-center gap-1.5">
+            <div className="h-3 w-6 rounded-full bg-accent p-0.5"><div className="ml-auto size-2 rounded-full bg-accent-ink" /></div>
+            <Line w="50%" />
+          </div>
+          <div className="flex gap-1">
+            {["bg-fg", "bg-accent", "bg-white/30", "bg-white/10"].map((c) => (
+              <div key={c} className={`size-3 rounded ${c}`} />
+            ))}
+          </div>
+        </div>
+        <div className="col-span-2 flex items-center gap-2 rounded-md border border-line bg-card px-2 py-1.5 font-mono text-[8px] text-faint">
+          <span className="text-accent">&lt;Button</span> variant=&quot;primary&quot; <span className="text-accent">/&gt;</span>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+function CalculaPreview() {
+  const rows: [string, number][] = [["Zone 1", 88], ["Zone 2", 46], ["Zone 3", 31], ["Wholesale", 64]];
+  return (
+    <Frame>
+      <div className="absolute inset-0 flex flex-col justify-center gap-2 p-3 text-[9px]">
+        {rows.map(([k, v], i) => (
+          <div key={k} className="flex items-center gap-2">
+            <span className="w-16 text-dim">{k}</span>
+            <div className="h-2 flex-1 rounded-sm bg-white/5">
+              <div className={`h-full rounded-sm ${i === 0 ? "bg-accent" : "bg-white/25"}`} style={{ width: `${v}%` }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </Frame>
+  );
+}
+
+function OrdersPreview() {
+  return (
+    <Frame>
+      <div className="absolute inset-0 space-y-1.5 p-3 text-[9px]">
+        {["Supplier A · 24 units", "Supplier B · 60 units", "Supplier C · 12 units"].map((r, i) => (
+          <div key={r} className="flex items-center gap-2 rounded border border-line bg-card px-2 py-1">
+            <span className={`size-2 rounded-sm border ${i < 2 ? "border-accent bg-accent" : "border-line-strong"}`} />
+            <span className="flex-1 text-dim">{r}</span>
+          </div>
+        ))}
+        <div className="flex justify-end gap-1.5 pt-0.5">
+          <span className="rounded border border-line-strong px-1.5 py-0.5 text-faint">PDF</span>
+          <span className="rounded bg-accent px-1.5 py-0.5 font-medium text-accent-ink">Create order</span>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
 const map: Record<PreviewKind, () => ReactNode> = {
+  collect: CollectPreview,
+  system: SystemPreview,
+  calcula: CalculaPreview,
+  orders: OrdersPreview,
   chat: ChatPreview,
   dashboard: DashboardPreview,
   website: WebsitePreview,

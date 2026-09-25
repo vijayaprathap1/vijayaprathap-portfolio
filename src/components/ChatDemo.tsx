@@ -158,7 +158,7 @@ export function ChatDemo({ autoStart = true }: { autoStart?: boolean }) {
             type="submit"
             aria-label="Send"
             disabled={busy || !draft.trim()}
-            className="grid size-8 place-items-center rounded-full bg-accent text-accent-ink transition-opacity disabled:opacity-30"
+            className="grid size-10 shrink-0 place-items-center rounded-full bg-accent text-accent-ink transition-opacity disabled:opacity-30"
           >
             <Icon name="send" className="size-3.5" />
           </button>

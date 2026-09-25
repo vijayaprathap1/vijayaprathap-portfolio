@@ -228,11 +228,14 @@ export function Scene() {
       weights.fill(0);
       weights[a.shape] += 1 - k;
       weights[b.shape] += k;
-      const mob = window.innerWidth < 1024;
+      const vw = window.innerWidth;
+      const mob = vw < 1024;
+      const narrow = vw < 640 && window.innerHeight > vw; // portrait phones: orb sits above the text
+      const xScale = vw < 640 ? 0 : mob ? 0.8 : 1; // landscape phones & tablets: keep it to the side
       return {
         w: weights,
-        x: mob ? 0 : a.x + (b.x - a.x) * k,
-        y: mob && i === 0 ? 2.6 * (1 - k) : 0,
+        x: (a.x + (b.x - a.x) * k) * xScale,
+        y: narrow && i === 0 ? 2.6 * (1 - k) : 0,
         alpha: (a.alpha + (b.alpha - a.alpha) * k) * (mob ? 0.85 : 1),
         scale: a.scale + (b.scale - a.scale) * k,
       };

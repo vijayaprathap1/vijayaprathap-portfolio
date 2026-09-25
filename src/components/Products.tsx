@@ -80,7 +80,7 @@ function StackCard({ p, i, n, progress }: { p: Product; i: number; n: number; pr
       >
         <div className="relative min-w-0 border-b border-line bg-bg/60 p-4 sm:p-7 lg:col-span-7 lg:border-r lg:border-b-0">
           <div className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-96 rounded-full bg-accent/15 blur-[100px]" aria-hidden="true" />
-          <div className="relative h-[22rem] sm:h-[26rem] lg:h-full">
+          <div className="relative h-[22rem] max-h-[80svh] min-h-[16rem] sm:h-[26rem] lg:h-full lg:max-h-none">
             {p.kind === "chat" ? (
               <ChatDemo />
             ) : (

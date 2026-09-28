@@ -189,17 +189,25 @@ export function Contact() {
 
           <Reveal className="lg:col-span-5" delay={0.08}>
             <div className="relative h-full overflow-hidden rounded-2xl border border-accent/30 bg-accent/[0.07] p-6 backdrop-blur-md sm:p-8">
-              <p className="eyebrow !text-accent">For businesses</p>
-              <h3 className="mt-3 text-xl font-medium tracking-[-0.02em]">An AI chatbot for your website</h3>
+              <p className="eyebrow !text-accent">For businesses · Botly</p>
+              <h3 className="mt-3 text-xl font-medium tracking-[-0.02em]">An AI assistant for your website</h3>
               <p className="mt-2 text-sm leading-relaxed text-dim">
-                The same streaming widget, set up for hotels, clinics and builders. It answers FAQs
-                around the clock and captures bookings and leads straight to WhatsApp.
+                My own product. It learns your website, answers customers around the clock in Tamil,
+                Hindi or English, and sends every lead straight to your WhatsApp.
               </p>
               <ul className="mt-4 flex flex-wrap gap-1.5">
-                {["Room bookings", "Appointment slots", "Lead qualification", "WhatsApp routing"].map((t) => (
+                {["One-line install", "Tamil · Hindi · Hinglish", "Lead capture", "Order tracking"].map((t) => (
                   <li key={t} className="chip !border-accent/30 !text-fg/80">{t}</li>
                 ))}
               </ul>
+              <a
+                href="https://botly-rosy.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
+              >
+                Try Botly <Icon name="arrow" className="size-3.5" />
+              </a>
             </div>
           </Reveal>
         </div>

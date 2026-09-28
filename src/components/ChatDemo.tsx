@@ -58,8 +58,15 @@ export function ChatDemo({ autoStart = true }: { autoStart?: boolean }) {
     if (!q || busy) return;
     setDraft("");
     setMsgs((m) => [...m, { from: "user", text: q, done: true }]);
+    const lower = q.toLowerCase();
+    const hit = chatScript.findIndex((c) => c.keys.some((k) => lower.includes(k)));
+    if (hit >= 0) {
+      setAsked((a) => (a.includes(hit) ? a : [...a, hit]));
+      stream(chatScript[hit].a);
+      return;
+    }
     stream(
-      `I'm a scripted demo of the widget, so I can only answer the suggested questions. For anything else, email ${profile.email}.`,
+      `I'm a scripted demo, so I only know a few topics: my products, Botly, Auto Collect AI and whether I'm open to work. For anything else, email ${profile.email}.`,
     );
   }
 
@@ -128,7 +135,7 @@ export function ChatDemo({ autoStart = true }: { autoStart?: boolean }) {
 
       <div className="border-t border-line px-4 pt-3 pb-4">
         {remaining.length > 0 && (
-          <div className="mb-3 flex gap-2 overflow-x-auto [scrollbar-width:none]">
+          <div className="mb-3 flex flex-wrap gap-2">
             {remaining.map((i) => (
               <button
                 key={i}

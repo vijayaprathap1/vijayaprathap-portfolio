@@ -277,15 +277,62 @@ function CollectPreview() {
             <p className="text-[14px] font-medium tabular-nums">€48,210</p>
           </div>
           <div className="rounded-md border border-line bg-card p-2">
-            <p className="text-[8px] tracking-wider text-faint uppercase">Recovery rate</p>
-            <div className="mt-1 h-1.5 rounded-full bg-white/5">
-              <div className="h-full w-[72%] rounded-full bg-accent" />
+            <p className="text-[8px] tracking-wider text-faint uppercase">Reminder workflow</p>
+            <div className="mt-1.5 flex items-center gap-1">
+              {[0, 1, 2, 3].map((i) => (
+                <div key={i} className={`h-1.5 flex-1 rounded-full ${i < 2 ? "bg-accent" : "bg-white/10"}`} />
+              ))}
             </div>
           </div>
           <div className="flex items-center justify-between rounded-md border border-accent/40 bg-accent/10 px-2 py-1.5 text-[9px]">
             <span className="text-dim">INV-2041</span>
-            <span className="rounded bg-accent px-1.5 py-0.5 font-medium text-accent-ink">Pay now</span>
+            <span className="rounded bg-accent px-1.5 py-0.5 font-medium text-accent-ink">Step 2 · sent</span>
           </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+function BotlyPreview() {
+  return (
+    <Frame url="yourshop.in">
+      <div className="absolute inset-0 p-3">
+        <div className="grid w-[46%] grid-cols-2 gap-1.5 opacity-50">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="flex flex-col gap-1 rounded-md border border-line bg-card p-1">
+              <div className="aspect-square rounded bg-gradient-to-br from-white/10 to-white/[0.02]" />
+              <Line w="70%" />
+            </div>
+          ))}
+        </div>
+        <div className="absolute right-3 bottom-3 flex w-[60%] min-w-44 flex-col overflow-hidden rounded-xl border border-line-strong bg-card">
+          <div className="flex items-center gap-2 border-b border-line px-3 py-2">
+            <span className="pulse-dot size-1.5 rounded-full bg-accent" />
+            <span className="text-[10px] font-medium">Botly</span>
+            <span className="ml-auto flex gap-1 font-mono text-[7.5px] text-faint">
+              <span className="rounded border border-line px-1">EN</span>
+              <span className="rounded border border-accent/50 px-1 text-accent">TA</span>
+              <span className="rounded border border-line px-1">HI</span>
+            </span>
+          </div>
+          <div className="space-y-1.5 p-2.5 text-[9.5px] leading-snug">
+            <p className="ml-auto w-fit max-w-[88%] rounded-lg rounded-br-sm bg-fg px-2 py-1 text-bg">
+              Chennai-ku delivery evlo naal aagum?
+            </p>
+            <p className="w-fit max-w-[92%] rounded-lg rounded-bl-sm bg-well px-2 py-1 text-dim">
+              Chennai-ku 2–3 naal-la varum. ₹999-ku mela free shipping
+              <span className="caret" />
+            </p>
+            <div className="flex flex-wrap gap-1 pt-0.5">
+              <span className="rounded-full border border-line-strong px-1.5 py-0.5 text-[8px] text-dim">Track order</span>
+              <span className="rounded-full border border-accent/50 bg-accent/10 px-1.5 py-0.5 text-[8px] text-accent">Talk to a person</span>
+            </div>
+          </div>
+        </div>
+        <div className="absolute top-3 right-3 flex items-center gap-1.5 rounded-md border border-accent/40 bg-accent/10 px-2 py-1 text-[8.5px]">
+          <span className="font-mono text-[7.5px] text-accent uppercase">New lead</span>
+          <span className="text-dim">→ WhatsApp</span>
         </div>
       </div>
     </Frame>
@@ -360,6 +407,7 @@ function OrdersPreview() {
 
 const map: Record<PreviewKind, () => ReactNode> = {
   collect: CollectPreview,
+  botly: BotlyPreview,
   system: SystemPreview,
   calcula: CalculaPreview,
   orders: OrdersPreview,

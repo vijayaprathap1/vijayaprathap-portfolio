@@ -3,7 +3,7 @@
 export const profile = {
   name: "Vijayaprathap P",
   first: "Vijayaprathap",
-  role: "Senior Frontend Engineer",
+  role: "Senior Full-Stack Engineer",
   location: "Puducherry, India",
   timezone: "Asia/Kolkata",
   email: "pvijayaprathap1@gmail.com",
@@ -16,14 +16,15 @@ export const profile = {
 };
 
 export const proof = [
-  { value: "4.5+", unit: "yrs", label: "Shipping production frontends" },
+  { value: "4.5+", unit: "yrs", label: "Shipping production software" },
   { value: "1,000+", unit: "/day", label: "AI conversations through my widget" },
   { value: "10k+", unit: "MAU", label: "Shoppers on a checkout I optimized" },
-  { value: "<1", unit: "sec", label: "SSR responses on Next.js 14" },
+  { value: "2", unit: "SaaS", label: "Products I built end to end, solo" },
 ] as const;
 
 export type PreviewKind =
   | "collect"
+  | "botly"
   | "chat"
   | "dashboard"
   | "website"
@@ -49,6 +50,7 @@ export type Product = {
   outcome: string;
   stack: string[];
   featured?: boolean;
+  links?: { label: string; href: string }[];
 };
 
 export const products: Product[] = [
@@ -58,19 +60,44 @@ export const products: Product[] = [
     kind: "collect",
     org: "Own product",
     year: "2026",
-    role: "Creator & lead engineer",
+    role: "Solo founder-engineer",
     featured: true,
     tagline: "Gets overdue B2B invoices paid, with the chasing done automatically.",
     problem:
       "Finance teams lose days chasing late invoices across spreadsheets, inboxes and accounting tools, and money sits unpaid.",
     built: [
-      "Provider analytics dashboard that turns receivables into clear visuals: aging buckets, outstanding balances, recovery rates",
-      "Automated recovery workflows for overdue payments",
-      "Secure OAuth sign-in and connectors to external accounting and ERP systems",
-      "Debtor self-service invoice review and payment, with direct payment-gateway settlement",
+      "Syncs invoices from Stripe, QuickBooks and CSV into email and SMS reminder workflows",
+      "Multi-tenant Postgres with row-level security: tenant isolation enforced by the database",
+      "Own auth (argon2id, DB sessions), team roles and a super-admin console",
+      "Credit billing on a Stripe-webhook ledger, debited in the same transaction as each send",
     ],
-    outcome: "Taken from 0 to 1: designed, architected and built end to end.",
-    stack: ["Next.js 14", "TypeScript", "Stripe", "OAuth", "PostgreSQL", "Tailwind CSS"],
+    outcome: "Built solo, 0 to 1: architecture, backend, UI and Playwright e2e tests.",
+    stack: ["React", "TypeScript", "Fastify", "PostgreSQL", "Stripe"],
+    links: [{ label: "Code", href: "https://github.com/vijayaprathap1/autocollect-ai" }],
+  },
+  {
+    slug: "botly",
+    name: "Botly",
+    kind: "botly",
+    org: "Own product",
+    year: "2026",
+    role: "Solo founder-engineer",
+    featured: true,
+    tagline: "An AI support assistant for Indian businesses, installed with one line of code.",
+    problem:
+      "Small Indian shops get questions in Tamil, Hindi and Hinglish around the clock, and can't afford a support team to answer them.",
+    built: [
+      "Onboards from a URL: crawls the site, and Claude drafts FAQs for the owner to approve",
+      "Streams answers in English, Tamil, Hindi and Hinglish, grounded in approved knowledge",
+      "Hybrid RAG (pgvector + full-text) and prompt caching keep answers accurate and cost flat",
+      "Leads to WhatsApp and email, Shopify / WooCommerce order lookup, Razorpay billing",
+    ],
+    outcome: "Live, with 150+ automated tests and an eval gate against prompt injection.",
+    stack: ["Next.js", "TypeScript", "Supabase", "Claude API", "pgvector"],
+    links: [
+      { label: "Live", href: "https://botly-rosy.vercel.app/" },
+      { label: "Code", href: "https://github.com/vijayaprathap1/botly" },
+    ],
   },
   {
     slug: "chatbot-widget",
@@ -297,11 +324,11 @@ export const education = {
 };
 
 export const stack = [
-  { group: "Core", items: ["React", "Next.js 14+", "TypeScript", "JavaScript ES6+", "Redux Toolkit", "Zustand"] },
-  { group: "Interface", items: ["Tailwind CSS", "SCSS", "Framer Motion", "Three.js", "ARIA", "Design systems"] },
-  { group: "Real-time & AI", items: ["LLM APIs", "SSE", "WebSockets", "Prompt design", "Agent workflows"] },
-  { group: "Data & payments", items: ["REST", "GraphQL", "TanStack Query", "Strapi", "PostgreSQL", "Stripe"] },
-  { group: "Quality", items: ["Node.js", "Webpack", "Jest", "BrowserStack", "Git", "CI/CD"] },
+  { group: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js", "Design systems"] },
+  { group: "Backend & data", items: ["Node.js", "Fastify", "PostgreSQL", "Supabase", "Row-level security", "REST", "GraphQL"] },
+  { group: "AI & real-time", items: ["Claude API", "RAG", "pgvector", "Tool use", "LLM evals", "SSE", "WebSockets"] },
+  { group: "Payments & integrations", items: ["Stripe", "Razorpay", "QuickBooks", "Shopify", "WhatsApp Cloud API", "Strapi"] },
+  { group: "Quality", items: ["Playwright", "Vitest", "Jest", "TanStack Query", "BrowserStack", "CI/CD"] },
 ] as const;
 
 export const principles = [
@@ -311,21 +338,30 @@ export const principles = [
   { title: "Own it end to end", body: "From a vague requirement to a shipped, measured feature, including the edge cases nobody wrote down." },
 ] as const;
 
-export const chatScript: { q: string; a: string }[] = [
+export const chatScript: { q: string; a: string; keys: string[] }[] = [
   {
     q: "What do you build?",
-    a: "Products for AI, fintech and commerce: a streaming chatbot, an agent dashboard, an invoice-recovery platform and the design systems underneath them.",
+    keys: ["build", "do you do", "work on", "skills", "stack", "experience", "about you", "who are you"],
+    a: "Full-stack products for AI, fintech and commerce. At Valopt, a streaming AI chatbot and its agent dashboard. On my own, two SaaS products: Auto Collect AI and Botly.",
+  },
+  {
+    q: "What is Botly?",
+    keys: ["botly", "support widget", "tamil", "hindi", "rag"],
+    a: "My AI support assistant for Indian businesses. It reads a shop's website, then answers customers in Tamil, Hindi or Hinglish, grounded in approved knowledge, and sends leads to WhatsApp.",
   },
   {
     q: "What is Auto Collect AI?",
-    a: "My own product. It tracks overdue B2B invoices, shows receivables as aging buckets and recovery rates, and lets debtors review and pay online.",
+    keys: ["auto collect", "autocollect", "invoice", "fintech", "dunning"],
+    a: "My invoice-chasing SaaS. It syncs unpaid invoices from Stripe and QuickBooks, runs reminder workflows, and keeps every tenant isolated with Postgres row-level security.",
   },
   {
     q: "Tell me about the chatbot",
+    keys: ["chatbot", "valopt", "widget", "sse", "stream"],
     a: "I led the Valopt AI Chatbot Widget. Replies stream in over SSE, token by token like this one, across 1,000+ sessions a day.",
   },
   {
     q: "Are you open to work?",
-    a: "Yes. I'm open to senior frontend and product-engineering roles, remote with EU or US overlap. Write to pvijayaprathap1@gmail.com.",
+    keys: ["open", "hire", "hiring", "available", "job", "role", "contact", "email", "remote", "salary"],
+    a: "Yes. I'm open to senior full-stack and product-engineering roles, remote with EU or US overlap. Write to pvijayaprathap1@gmail.com.",
   },
 ];

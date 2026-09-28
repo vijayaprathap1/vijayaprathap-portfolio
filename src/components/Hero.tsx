@@ -20,7 +20,7 @@ export function Hero() {
             className="inline-flex items-center gap-2.5 rounded-full border border-line bg-bg/50 py-1.5 pr-3.5 pl-2.5 text-[13px] text-dim backdrop-blur-md transition-colors hover:border-line-strong hover:text-fg"
           >
             <span className="pulse-dot size-2 rounded-full bg-accent" />
-            Open to senior frontend & product roles
+            Open to senior full-stack & product roles
           </a>
           <span className="font-mono text-xs text-faint">Remote · EU / US overlap</span>
         </motion.div>
@@ -31,7 +31,7 @@ export function Hero() {
           delay={0.15}
           className="mt-8 max-w-[15ch] text-[clamp(2.9rem,7vw,6.6rem)] lg:max-w-[64%] leading-[0.92] font-medium tracking-[-0.05em]"
           parts={[
-            "I build the interfaces behind",
+            "I build products for",
             { t: "AI,", className: "serif text-accent" },
             { t: "fintech", className: "serif" },
             "and",
@@ -45,9 +45,10 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.75, ease }}
           className="mt-8 max-w-xl text-lg leading-relaxed text-dim"
         >
-          I'm {profile.first}, a senior frontend engineer at Valopt and the creator of Auto Collect
-          AI. {profile.years} years of React, Next.js and TypeScript, shipped to real users: an AI
-          chatbot with 1,000+ conversations a day, a checkout for 10,000+ shoppers a month.
+          I'm {profile.first}, a senior full-stack engineer at Valopt. On my own I've built two SaaS
+          products, Auto Collect AI and Botly, from database to UI. {profile.years} years shipping to
+          real users: an AI chatbot with 1,000+ conversations a day, a checkout for 10,000+ shoppers
+          a month.
         </motion.p>
 
         <motion.div

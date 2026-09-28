@@ -12,9 +12,33 @@ import { products, type Product } from "@/data";
 import { ChatDemo } from "./ChatDemo";
 import { SplitReveal, Tilt } from "./motionkit";
 import { Preview } from "./previews";
-import { Icon, Reveal } from "./ui";
+import { BrandIcon, Icon, Reveal } from "./ui";
 
 const ease = [0.16, 1, 0.3, 1] as const;
+
+const WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen"];
+const countWord = (n: number) => WORDS[n] ?? String(n);
+
+function ProductLinks({ links, className = "" }: { links?: Product["links"]; className?: string }) {
+  if (!links?.length) return null;
+  return (
+    <div className={`flex flex-wrap gap-2 ${className}`}>
+      {links.map((l) => (
+        <a
+          key={l.href}
+          href={l.href}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex h-9 items-center gap-1.5 rounded-full border border-line-strong px-3.5 text-sm text-fg/90 transition-colors hover:border-accent hover:text-accent"
+        >
+          {l.label === "Code" ? <BrandIcon name="github" className="size-3.5" /> : <span className="pulse-dot size-1.5 rounded-full bg-accent" />}
+          {l.label === "Code" ? "View code" : "Try it live"}
+          <Icon name="arrow" className="size-3.5" />
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export function Products() {
   const featured = products.filter((p) => p.featured);
@@ -31,12 +55,12 @@ export function Products() {
             </p>
             <SplitReveal
               className="mt-4 text-[clamp(2.2rem,5vw,4.4rem)] leading-[0.98] font-medium tracking-[-0.045em]"
-              parts={["Twelve products,", { t: "built for real users.", className: "serif text-dim" }]}
+              parts={[`${countWord(products.length)} products,`, { t: "built for real users.", className: "serif text-dim" }]}
             />
           </div>
           <Reveal className="text-[15px] leading-relaxed text-dim md:col-span-4 md:pb-2">
-            My own fintech product, an AI support suite at Valopt, and the tools behind two French
-            e-commerce stores. Scroll through the headliners, then open anything in the index.
+            Two SaaS products of my own, an AI support suite at Valopt, and the tools behind two
+            French e-commerce stores. Scroll through the headliners, then open anything in the index.
           </Reveal>
         </div>
       </div>
@@ -76,7 +100,7 @@ function StackCard({ p, i, n, progress }: { p: Product; i: number; n: number; pr
     <div className="mb-8 lg:sticky lg:mb-0 lg:h-[92vh] lg:pt-2" style={{ top: `${88 + i * 26}px` }}>
       <motion.article
         style={{ scale, transformOrigin: "top center" }}
-        className="relative grid grid-cols-1 overflow-hidden rounded-[1.75rem] border border-line-strong bg-raised shadow-[0_-30px_80px_-40px_rgb(0_0_0/0.9)] lg:h-[min(76vh,44rem)] lg:grid-cols-12"
+        className="relative grid grid-cols-1 overflow-hidden rounded-[1.75rem] border border-line-strong bg-raised shadow-[0_-30px_80px_-40px_rgb(0_0_0/0.9)] lg:h-[min(78vh,45rem)] lg:grid-cols-12"
       >
         <div className="relative min-w-0 border-b border-line bg-bg/60 p-4 sm:p-7 lg:col-span-7 lg:border-r lg:border-b-0">
           <div className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-96 rounded-full bg-accent/15 blur-[100px]" aria-hidden="true" />
@@ -91,20 +115,21 @@ function StackCard({ p, i, n, progress }: { p: Product; i: number; n: number; pr
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-col p-6 sm:p-9 lg:col-span-5 lg:overflow-y-auto">
+        <div className="flex min-w-0 flex-col p-6 sm:p-9 lg:col-span-5 lg:overflow-y-auto lg:p-8">
           <div className="flex items-center justify-between gap-3">
             <span className={`chip ${p.org === "Own product" ? "!border-accent/50 !text-accent" : ""}`}>{p.org}</span>
             <span className="font-mono text-xs text-faint">
               {String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
             </span>
           </div>
-          <h3 className="mt-6 text-[clamp(1.9rem,3vw,2.75rem)] leading-[1.02] font-medium tracking-[-0.035em]">{p.name}</h3>
+          <h3 className="mt-5 text-[clamp(1.9rem,3vw,2.75rem)] leading-[1.02] font-medium tracking-[-0.035em]">{p.name}</h3>
           <p className="mt-2 font-mono text-xs text-faint uppercase">
             {p.year} · {p.role}
           </p>
-          <p className="mt-5 leading-relaxed text-dim">{p.tagline}</p>
+          <p className="mt-4 leading-relaxed text-dim">{p.tagline}</p>
+          <ProductLinks links={p.links} className="mt-4" />
 
-          <ul className="mt-6 space-y-2.5 text-[15px]">
+          <ul className="mt-5 space-y-1.5 text-[15px]">
             {p.built.map((b) => (
               <li key={b} className="flex gap-3 leading-relaxed text-fg/85">
                 <span className="mt-2.5 size-1 shrink-0 rounded-full bg-accent" />
@@ -113,10 +138,10 @@ function StackCard({ p, i, n, progress }: { p: Product; i: number; n: number; pr
             ))}
           </ul>
 
-          <p className="mt-6 rounded-xl border border-accent/25 bg-accent/[0.07] px-4 py-3 text-[15px] font-medium">
+          <p className="mt-4 rounded-xl border border-accent/25 bg-accent/[0.07] px-4 py-3 text-[15px] font-medium">
             <span className="text-accent">→</span> {p.outcome}
           </p>
-          <ul className="mt-auto flex flex-wrap gap-1.5 pt-6">
+          <ul className="mt-auto flex flex-wrap gap-1.5 pt-5">
             {p.stack.map((s) => (
               <li key={s} className="chip">
                 {s}
@@ -199,14 +224,14 @@ function ProductIndex({ items, onOpen }: { items: Product[]; onOpen: (p: Product
               >
                 <span className="pointer-events-none absolute inset-0 origin-bottom scale-y-0 bg-gradient-to-r from-accent/[0.08] to-transparent transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-y-100" />
                 <span className="relative hidden font-mono text-xs text-faint sm:block">{String(i + 1).padStart(2, "0")}</span>
-                <span className="relative text-xl font-medium tracking-[-0.02em] transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-2 sm:text-2xl">
+                <span className="relative col-start-1 text-xl font-medium tracking-[-0.02em] transition-transform sm:col-start-auto duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-2 sm:text-2xl">
                   {p.name}
                 </span>
                 <span className="relative col-start-1 text-sm text-dim sm:col-start-auto">{p.tagline}</span>
                 <span className="relative hidden font-mono text-xs text-faint sm:block">
                   {p.org} · {p.year}
                 </span>
-                <span className="relative row-span-2 row-start-1 grid size-9 place-items-center rounded-full border border-line text-dim transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink sm:row-span-1 sm:row-start-auto">
+                <span className="relative col-start-2 row-span-2 row-start-1 grid size-9 place-items-center rounded-full border border-line text-dim transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink sm:col-start-auto sm:row-span-1 sm:row-start-auto">
                   <Icon name="arrow" className="size-4" />
                 </span>
               </button>
@@ -287,6 +312,7 @@ function Drawer({ product, onClose }: { product: Product | null; onClose: () => 
               <h2 id="drawer-title" className="mt-8 text-3xl leading-tight font-medium tracking-[-0.03em]">{product.name}</h2>
               <p className="mt-1 font-mono text-xs text-faint uppercase">{product.role}</p>
               <p className="mt-4 text-lg leading-relaxed text-dim">{product.tagline}</p>
+              <ProductLinks links={product.links} className="mt-5" />
               <dl className="mt-8 space-y-7">
                 <div>
                   <dt className="eyebrow">Problem</dt>

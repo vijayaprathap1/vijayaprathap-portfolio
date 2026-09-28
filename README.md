@@ -1,6 +1,6 @@
 # Vijayaprathap P — Portfolio
 
-**Senior Frontend Engineer** building interfaces for AI, fintech and commerce products.
+**Senior Full-Stack Engineer** building AI, fintech and commerce products, from database to UI.
 
 **Live:** [vijayaprathap.vercel.app](https://vijayaprathap.vercel.app) · [LinkedIn](https://linkedin.com/in/vjprathap) · [pvijayaprathap1@gmail.com](mailto:pvijayaprathap1@gmail.com)
 
@@ -19,7 +19,7 @@ A single-page portfolio for the products I've built over 4.5+ years. The site it
 
 - **Three.js particle scene.** One GPU particle system with custom GLSL shaders that changes shape as you scroll: an AI core in the hero, orbit rings behind the products, a data wave behind experience, and a knot behind the stack. Particles move away from the cursor.
 - **Live chat demo.** A working copy of the Valopt AI Chatbot Widget. Replies stream in word by word, the way the real widget streams over Server-Sent Events.
-- **Stacking product cards.** Three featured products stay pinned and stack on top of each other as you scroll.
+- **Stacking product cards.** Four featured products stay pinned and stack on top of each other as you scroll.
 - **Product index.** Filter by company, hover a row for a floating preview that follows the cursor, and click for a full case study in a side panel.
 - **Motion details.** Headlines rise in word by word, buttons drift toward the cursor, the experience timeline draws itself as you scroll, and a progress bar runs along the top.
 - **Coded product previews.** Every product visual is built in React and CSS instead of a screenshot, so no private client work is exposed.
@@ -28,7 +28,8 @@ A single-page portfolio for the products I've built over 4.5+ years. The site it
 
 | Product | Where | What it is |
 | --- | --- | --- |
-| **Auto Collect AI** | Own product | B2B invoice recovery: receivables dashboard, automated follow-ups, online debtor payments |
+| **Auto Collect AI** | Own product | B2B invoice-chasing SaaS: reminder workflows, multi-tenant Postgres with RLS, Stripe + QuickBooks sync ([code](https://github.com/vijayaprathap1/autocollect-ai)) |
+| **Botly** | Own product | AI support assistant for Indian businesses: multilingual answers, hybrid RAG, lead capture ([live](https://botly-rosy.vercel.app/) · [code](https://github.com/vijayaprathap1/botly)) |
 | **Valopt AI Chatbot Widget** | Valopt | Embeddable AI agent with streaming replies, 1,000+ daily sessions |
 | **AI Agent & Analytics Dashboard** | Valopt | Real-time console for monitoring AI agents |
 | Valopt.ai Website | Valopt | SEO-first Next.js 14 site with sub-second loads |
